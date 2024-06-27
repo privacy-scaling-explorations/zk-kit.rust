@@ -1,0 +1,17 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "example"
+version = "0.1.0"
+authors = [ "Pinco" ]
+description = "Just an example."
+homepage = "https://arkworks.rs"
+repository = "privacy-scaling-explorations/zk-kit.rust"
+documentation = "https://docs.rs/example"
+keywords = ["cryptography", "finite-fields", "elliptic-curves" ]
+categories = ["cryptography"]
+include = ["Cargo.toml", "src", "README.md", "LICENSE"]
+license = "MIT"
+edition = "2021"
+
+[dependencies]
