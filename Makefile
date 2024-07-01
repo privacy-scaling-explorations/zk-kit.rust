@@ -23,7 +23,7 @@ check: ## check that all files match formatting rules
 docs: ## build & open the documentation in the browser
 	@cargo doc --no-deps --open --all-features
 
-fix: ## apply lint suggestion
+fix: ## apply lint suggestions
 	@cargo clippy --all-targets --all-features --workspace --fix
 
 fmt: ## format all files
