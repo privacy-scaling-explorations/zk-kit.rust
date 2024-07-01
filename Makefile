@@ -26,6 +26,12 @@ docs: ## build & open the documentation in the browser
 fmt: ## format all files
 	@dprint fmt
 
+lint: ## lint code
+	@cargo clippy --all-targets --all-features --workspace
+
+fix: ## apply lint suggestion
+	@cargo clippy --all-targets --all-features --workspace --fix
+
 setup: ## run the setup script to install dependencies
 	@./.setup.sh
 
