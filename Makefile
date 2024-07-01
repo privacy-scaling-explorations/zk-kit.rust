@@ -12,7 +12,7 @@ help: ## display this help message (default task)
 		awk 'BEGIN {FS = ":.*?## "}; {printf "$(CYAN)%-20s$(RESET) %s\n", $$1, $$2}'
 
 build:
-	@cargo build
+	@cargo build --workspace --all-features --all-targets --release
 
 build.docs: ## build the documentation
 	@cargo doc --no-deps --all-features
