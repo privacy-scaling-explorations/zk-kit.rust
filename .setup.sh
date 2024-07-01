@@ -74,6 +74,10 @@ EOF
   log "\nConventional commits lint hook written to .git/hooks/pre-push"
 }
 
+setup_convco() {
+  git config --local core.editor ".cargo/bin/convco commit"
+}
+
 end_log() {
   log "\nTo get started, you can run the make tasks defined in the Makefile.\n"
   make help | tail -n +2 | head -n -1
@@ -82,6 +86,7 @@ end_log() {
 main() {
   install_dev_deps
   write_pre_push_hook
+  setup_convco
   end_log
 }
 
