@@ -12,7 +12,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format-lint:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2.7.3
+      - run: make build
+
+  format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +28,16 @@ jobs:
         with:
           tool: dprint
       - run: make check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2.7.3
+      - run: make lint
 
   test:
     runs-on: ubuntu-latest
