@@ -1,40 +1,40 @@
 name: main
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
+  push:
+    branches:
+      - main
+  pull_request:
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: Install Rust
-              uses: dtolnay/rust-toolchain@stable
-              with:
-                  toolchain: stable
-                  components: rustfmt, clippy
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
 
-            - name: Cache
-              uses: Swatinem/rust-cache@v2
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
 
-            - name: Build
-              run: cargo build --workspace --all-targets
+      - name: Build
+        run: cargo build --workspace --all-targets
 
-            - name: Run tests
-              run: cargo test --workspace --all-targets
+      - name: Run tests
+        run: cargo test --workspace --all-targets
 
-            - name: Run clippy
-              run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Run clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
 
-            - name: Run fmt check
-              run: cargo fmt -- --check
+      - name: Run fmt check
+        run: cargo fmt -- --check

@@ -46,11 +46,11 @@
 
 ## 🗂️ Repositories
 
--   Javascript: https://github.com/privacy-scaling-explorations/zk-kit
--   Rust: https://github.com/privacy-scaling-explorations/zk-kit.rust
--   Solidity: https://github.com/privacy-scaling-explorations/zk-kit.solidity
--   Circom: https://github.com/privacy-scaling-explorations/zk-kit.circom
--   Noir: https://github.com/privacy-scaling-explorations/zk-kit.noir
+- Javascript: https://github.com/privacy-scaling-explorations/zk-kit
+- Rust: https://github.com/privacy-scaling-explorations/zk-kit.rust
+- Solidity: https://github.com/privacy-scaling-explorations/zk-kit.solidity
+- Circom: https://github.com/privacy-scaling-explorations/zk-kit.circom
+- Noir: https://github.com/privacy-scaling-explorations/zk-kit.noir
 
 ## 📦 Crates
 
@@ -87,10 +87,10 @@
 
 ## 👥 Ways to contribute
 
--   🔧 Work on [open issues](https://github.com/privacy-scaling-explorations/zk-kit.rust/contribute)
--   📦 Suggest new [crates](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---crate.md&title=)
--   🚀 Share ideas for new [features](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---feature.md&title=)
--   🐛 Create a report if you find any [bugs](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=bug+%F0%9F%90%9B&template=---bug.md&title=) in the code
+- 🔧 Work on [open issues](https://github.com/privacy-scaling-explorations/zk-kit.rust/contribute)
+- 📦 Suggest new [crates](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---crate.md&title=)
+- 🚀 Share ideas for new [features](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---feature.md&title=)
+- 🐛 Create a report if you find any [bugs](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=bug+%F0%9F%90%9B&template=---bug.md&title=) in the code
 
 ## 🛠 Install
 
