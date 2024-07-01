@@ -1,4 +1,4 @@
-name: Deploy docs
+name: docs
 on:
   push:
     branches: [main]
@@ -12,7 +12,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: moonrepo/setup-rust@v1.2.0
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2.7.3
       - name: Build docs
         run: cargo doc --no-deps --all-features
       - uses: peaceiris/actions-gh-pages@v4.0.0

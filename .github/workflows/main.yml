@@ -1,40 +1,31 @@
-name: main
-
+name: Pull Requests
+# test
 on:
-  push:
-    branches:
-      - main
   pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+  push:
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  format-lint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
+      - uses: taiki-e/cache-cargo-install-action@v2.0.1
         with:
-          toolchain: stable
-          components: rustfmt, clippy
+          tool: dprint
+      - run: make check
 
-      - name: Cache
-        uses: Swatinem/rust-cache@v2
-
-      - name: Build
-        run: cargo build --workspace --all-targets
-
-      - name: Run tests
-        run: cargo test --workspace --all-targets
-
-      - name: Run clippy
-        run: cargo clippy --workspace --all-targets -- -D warnings
-
-      - name: Run fmt check
-        run: cargo fmt -- --check
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/cache-cargo-install-action@v2.0.1
+        with:
+          tool: cargo-nextest
+      - run: cargo nextest run
