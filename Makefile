@@ -23,14 +23,14 @@ check: ## check that all files match formatting rules
 docs: ## build & open the documentation in the browser
 	@cargo doc --no-deps --open --all-features
 
+fix: ## apply lint suggestion
+	@cargo clippy --all-targets --all-features --workspace --fix
+
 fmt: ## format all files
 	@dprint fmt
 
 lint: ## lint code
 	@cargo clippy --all-targets --all-features --workspace
-
-fix: ## apply lint suggestion
-	@cargo clippy --all-targets --all-features --workspace --fix
 
 setup: ## run the setup script to install dependencies
 	@./.setup.sh
