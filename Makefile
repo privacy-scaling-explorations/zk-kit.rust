@@ -3,15 +3,15 @@ CYAN := \033[36m
 RESET := \033[0m
 export PATH := $(DEV_BIN_DIR):$(PATH)
 
-.PHONY: fmt build test setup
+.PHONY: help build build.docs fix fmt lint setup test
 
 help: ## display this help message (default task)
 	@printf "%b\n" "Usage: make [$(CYAN)task$(RESET)]"
 	@printf "%s\n" "Available tasks:"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+	@grep -E '^[a-zA-Z_]+(\.[a-zA-Z_]+)*:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "$(CYAN)%-20s$(RESET) %s\n", $$1, $$2}'
 
-build:
+build: ## build the project
 	@cargo build --workspace --all-features --all-targets --release
 
 build.docs: ## build the documentation
