@@ -20,6 +20,9 @@ build.docs: ## build the documentation
 check: ## check that all files match formatting rules
 	@dprint check
 
+commit: ## make conventional commit
+	@.cargo/bin/convco commit
+
 docs: ## build & open the documentation in the browser
 	@cargo doc --no-deps --open --all-features
 

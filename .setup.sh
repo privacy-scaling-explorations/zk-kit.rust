@@ -1,7 +1,6 @@
 #!/bin/sh
 set -eou pipefail
 
-CYAN="\033[36m"
 ORANGE="\033[33m"
 RESET="\033[0m"
 
@@ -71,22 +70,29 @@ done
 EOF
 
   chmod +x .git/hooks/pre-push
-  log "\nConventional commits lint hook written to .git/hooks/pre-push"
+  log "  .git/hooks/pre-push (conventional commits linting)"
 }
 
-setup_convco() {
-  git config --local core.editor ".cargo/bin/convco commit"
+write_pre_commit_hook() {
+  echo "make fmt" >.git/hooks/pre-commit
+  chmod +x .git/hooks/pre-commit
+  log "  .git/hooks/pre-commit (formatting)"
+}
+
+write_hooks() {
+  log "Writing hooks..."
+  write_pre_commit_hook
+  write_pre_push_hook
 }
 
 end_log() {
-  log "\nTo get started, you can run the make tasks defined in the Makefile.\n"
+  log "===================\nTo get started, you can run the make tasks defined in the Makefile.\n"
   make help | tail -n +2 | head -n -1
 }
 
 main() {
   install_dev_deps
-  write_pre_push_hook
-  setup_convco
+  write_hooks
   end_log
 }
 
