@@ -2,13 +2,21 @@
 set -eu
 
 ORANGE="\033[33m"
+RED="\033[31m"
 RESET="\033[0m"
 
 log() {
   printf "%b\n" "$1"
 }
 
-is_bin_locally_available() {
+is_make_available() {
+  if ! command -v make >/dev/null; then
+    log "${RED}error: make is not available.$RESET\nPlease install ${ORANGE}make$RESET for your OS and run this script again."
+    return 1
+  fi
+}
+
+is_crate_bin_locally_available() {
   crate="$1"
   [ -x ".cargo/bin/$crate" ]
 }
@@ -21,7 +29,7 @@ install_local() {
 
 maybe_install_local() {
   crate="$1"
-  if ! is_bin_locally_available "$crate"; then
+  if ! is_crate_bin_locally_available "$crate"; then
     install_local "$crate"
   else
     log "  $ORANGE$crate$RESET already installed locally. Skipping."
@@ -91,6 +99,7 @@ end_log() {
 }
 
 main() {
+  is_make_available
   install_dev_deps
   write_hooks
   end_log
