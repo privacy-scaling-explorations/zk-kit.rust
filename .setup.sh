@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eou pipefail
+set -eu
 
 ORANGE="\033[33m"
 RESET="\033[0m"
