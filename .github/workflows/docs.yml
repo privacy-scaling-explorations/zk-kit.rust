@@ -5,18 +5,34 @@ on:
     paths: ['src/**/*.rs', 'Cargo.toml', '.github/workflows/docs.yml']
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  deploy-docs:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2.7.3
+      - uses: actions/configure-pages@v5
       - name: Build docs
-        run: cargo doc --no-deps --all-features
-      - uses: peaceiris/actions-gh-pages@v4.0.0
+        run: |
+          make build.docs
+          # we need an index.html page (cargo doc doesn't create it)
+          # this will just redirect to target/doc/example/index.html
+          echo '<meta http-equiv="refresh" content="0;url=example/index.html">' > target/doc/index.html
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/doc
+          path: target/doc
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deploy
