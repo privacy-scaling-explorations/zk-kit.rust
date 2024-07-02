@@ -24,7 +24,7 @@ maybe_install_local() {
   if ! is_bin_locally_available "$crate"; then
     install_local "$crate"
   else
-    log "$ORANGE$crate$RESET already installed locally. Skipping."
+    log "  $ORANGE$crate$RESET already installed locally. Skipping."
   fi
 }
 
