@@ -87,7 +87,7 @@ write_hooks() {
 
 end_log() {
   log "===================\nTo get started, you can run the make tasks defined in the Makefile.\n"
-  make help | tail -n +2 | head -n -1
+  make help
 }
 
 main() {

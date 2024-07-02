@@ -1,3 +1,5 @@
+MAKEFLAGS += --no-print-directory
+
 DEV_BIN_DIR := .cargo/bin
 CYAN := \033[36m
 RESET := \033[0m
