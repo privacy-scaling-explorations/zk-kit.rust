@@ -95,6 +95,7 @@ main() {
   is_make_available
   install_dev_deps
   write_hooks
+  integrate_convco_with_git
   end_log
 }
 
