@@ -45,52 +45,38 @@ install_dev_deps() {
   done
 }
 
-write_pre_push_hook() {
-  cat >.git/hooks/pre-push <<'EOF'
-#!/bin/sh
-alias convco=.cargo/bin/convco
-
-# https://convco.github.io/check/
-z40=0000000000000000000000000000000000000000
-
-while read -r _ local_sha _ remote_sha; do
-  if [ "$local_sha" != $z40 ]; then
-    if [ "$remote_sha" = $z40 ]; then
-      # New branch, examine all commits
-      range="$local_sha"
-    else
-      # Update to existing branch, examine new commits
-      range="$remote_sha..$local_sha"
-    fi
-
-    # Check only the commits that are not in main
-    merge_base=$(git merge-base "$local_sha" main)
-    if [ -n $merge_base ];then
-      range="$merge_base..$local_sha"
-    fi
-
-    # Check for WIP commit
-    if ! convco check "$range"; then
-      exit 1
-    fi
-  fi
-done
-EOF
-
-  chmod +x .git/hooks/pre-push
-  log "  .git/hooks/pre-push (conventional commits linting)"
-}
-
 write_pre_commit_hook() {
   echo "make fmt" >.git/hooks/pre-commit
   chmod +x .git/hooks/pre-commit
   log "  .git/hooks/pre-commit (formatting)"
 }
 
+write_commit_msg_hook() {
+  cat >.git/hooks/commit-msg <<'EOF'
+#!/bin/sh
+alias convco=.cargo/bin/convco
+
+# https://convco.github.io/check/
+z40=0000000000000000000000000000000000000000
+
+main() {
+  if ! cat .git/COMMIT_EDITMSG | convco check --from-stdin --ignore-reverts;then
+    printf "%s\n" "Please refer to https://www.conventionalcommits.org/en/v1.0.0"
+    exit 1
+  fi
+}
+
+main
+EOF
+
+  chmod +x .git/hooks/commit-msg
+  log "  .git/hooks/commit-msg (conventional commits linting)"
+}
+
 write_hooks() {
   log "Writing hooks..."
   write_pre_commit_hook
-  write_pre_push_hook
+  write_commit_msg_hook
 }
 
 end_log() {
