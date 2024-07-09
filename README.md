@@ -118,7 +118,7 @@ You can proof your code for consistency with our formatting rules:
 make check
 ```
 
-or automatically format the code:
+or automatically format the code (performed automatically in a `pre-commit` hook):
 
 ```commandline
 make fmt
@@ -139,7 +139,7 @@ make fix
 ### Conventional commits
 
 ZK-Kit uses [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).\
-Compliance with these rules is enforced with a pre-push git hook, which was set up when you ran `make setup`.
+Compliance with these rules is enforced with a `commit-msg` git hook, which was set up when you ran `make setup`.
 
 ### Testing
 
