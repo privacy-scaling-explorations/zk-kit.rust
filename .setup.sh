@@ -81,7 +81,9 @@ write_hooks() {
 
 integrate_convco_with_git() {
   git config --local core.editor ".cargo/bin/convco commit"
-  log "Integrating convco with git..."
+  # do not use convco for interactive rebase (git rebase -i)
+  git config --local sequence.editor "$EDITOR"
+  log "Integrated convco with git"
 }
 
 end_log() {
