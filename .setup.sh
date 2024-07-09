@@ -79,6 +79,11 @@ write_hooks() {
   write_commit_msg_hook
 }
 
+integrate_convco_with_git() {
+  git config --local core.editor ".cargo/bin/convco commit"
+  log "Integrating convco with git..."
+}
+
 end_log() {
   log "===================\nTo get started, you can run the make tasks defined in the Makefile.\n"
   make help
