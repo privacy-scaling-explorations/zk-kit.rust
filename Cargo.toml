@@ -3,11 +3,11 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/*"
+  "crates/*",
 ]
 
 [workspace.package]
 version = "0.0.1"
-license = "MIT"
 edition = "2021"
+license = "MIT"
 publish = false

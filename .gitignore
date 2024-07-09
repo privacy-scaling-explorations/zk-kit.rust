@@ -1,1 +1,7 @@
-/target
+.cargo/*
+!.cargo/config.toml
+Cargo.lock
+target
+
+.envrc
+.tool-versions

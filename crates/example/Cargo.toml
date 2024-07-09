@@ -3,15 +3,15 @@
 [package]
 name = "example"
 version = "0.1.0"
-authors = [ "Pinco" ]
-description = "Just an example."
-homepage = "https://arkworks.rs"
-repository = "privacy-scaling-explorations/zk-kit.rust"
-documentation = "https://docs.rs/example"
-keywords = ["cryptography", "finite-fields", "elliptic-curves" ]
+authors = ["Pinco"]
 categories = ["cryptography"]
-include = ["Cargo.toml", "src", "README.md", "LICENSE"]
-license = "MIT"
+documentation = "https://docs.rs/example"
 edition = "2021"
+homepage = "https://arkworks.rs"
+include = ["Cargo.toml", "src", "README.md", "LICENSE"]
+keywords = ["cryptography", "finite-fields", "elliptic-curves"]
+license = "MIT"
+repository = "privacy-scaling-explorations/zk-kit.rust"
+description = "Just an example."
 
 [dependencies]

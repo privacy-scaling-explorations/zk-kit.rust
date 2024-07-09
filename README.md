@@ -28,7 +28,7 @@
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <a href="/CODE_OF_CONDUCT.md">
-            🤝 Code of conduct
+            🤝 Code of Conduct
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new/choose">
@@ -46,19 +46,23 @@
 
 ## 🗂️ Repositories
 
--   Javascript: https://github.com/privacy-scaling-explorations/zk-kit
--   Rust: https://github.com/privacy-scaling-explorations/zk-kit.rust
--   Solidity: https://github.com/privacy-scaling-explorations/zk-kit.solidity
--   Circom: https://github.com/privacy-scaling-explorations/zk-kit.circom
--   Noir: https://github.com/privacy-scaling-explorations/zk-kit.noir
+- **JavaScript:** [zk-kit](https://github.com/privacy-scaling-explorations/zk-kit)
+- **Rust:** [zk-kit.rust](https://github.com/privacy-scaling-explorations/zk-kit.rust)
+- **Solidity:** [zk-kit.solidity](https://github.com/privacy-scaling-explorations/zk-kit.solidity)
+- **Circom:** [zk-kit.circom](https://github.com/privacy-scaling-explorations/zk-kit.circom)
+- **Noir:** [zk-kit.noir](https://github.com/privacy-scaling-explorations/zk-kit.noir)
 
 ## 📦 Crates
 
 <table>
-    <th>Package</th>
-    <th>Version</th>
-    <th>Downloads</th>
-    <th>Audited</th>
+    <thead>
+        <tr>
+            <th>Package</th>
+            <th>Version</th>
+            <th>Downloads</th>
+            <th>Audited</th>
+        </tr>
+    </thead>
     <tbody>
         <tr>
             <td>
@@ -67,13 +71,11 @@
                 </a>
             </td>
             <td>
-                <!-- Crate version -->
                 <a href="https://docs.rs/example">
                     <img src="https://img.shields.io/crates/d/example?style=flat-square" alt="Crate version" />
                 </a>
             </td>
             <td>
-                <!-- Crate downloads -->
                 <a href="https://docs.rs/example">
                     <img src="https://img.shields.io/crates/v/example?style=flat-square" alt="Crate downloads" />
                 </a>
@@ -85,71 +87,72 @@
     <tbody>
 </table>
 
-## 👥 Ways to contribute
+## 👥 Ways to Contribute
 
--   🔧 Work on [open issues](https://github.com/privacy-scaling-explorations/zk-kit.rust/contribute)
--   📦 Suggest new [crates](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---crate.md&title=)
--   🚀 Share ideas for new [features](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---feature.md&title=)
--   🐛 Create a report if you find any [bugs](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=bug+%F0%9F%90%9B&template=---bug.md&title=) in the code
+- 🔧 Work on [open issues](https://github.com/privacy-scaling-explorations/zk-kit.rust/contribute)
+- 📦 Suggest new [crates](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---crate.md&title=)
+- 🚀 Share ideas for new [features](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=feature+%3Arocket%3A&template=---feature.md&title=)
+- 🐛 Create a report if you find any [bugs](https://github.com/privacy-scaling-explorations/zk-kit.rust/issues/new?assignees=&labels=bug+%F0%9F%90%9B&template=---bug.md&title=) in the code
 
-## 🛠 Install
-
-Clone this repository:
+## 🛠 Setup
 
 ```bash
-git clone https://github.com/privacy-scaling-explorations/zk-kit.rust.git
+git clone https://github.com/privacy-scaling-explorations/zk-kit.rust.git && make setup
 ```
 
-and install the dependencies:
-
-```bash
-cd zk-kit.rust && cargo build
-```
+This will clone this repository and install the required development dependencies locally.
 
 ## 📜 Usage
 
-### Code quality and formatting
+You can view the available tasks with:
 
-Run [rustfmt](https://github.com/rust-lang/rustfmt) to check formatting rules:
-
-```bash
-cargo fmt -- --check
+```commandline
+make
 ```
 
-or automatically format the code:
+### Code Quality and Formatting
 
-```bash
-cargo fmt
+You can proof your code for consistency with our formatting rules:
+
+```commandline
+make check
 ```
 
-Run [Clippy](https://github.com/rust-lang/rust-clippy) to analyze the code and catch bugs:
+or automatically format the code (performed automatically in a `pre-commit` hook):
 
-```bash
-cargo clippy --workspace --all-targets
+```commandline
+make fmt
 ```
 
-or automatically apply suggestions:
+To lint and analyze the code for potential bugs:
 
-```bash
-cargo clippy --workspace --fix
+```commandline
+make lint
+```
+
+or automatically apply lint fix suggestions:
+
+```commandline
+make fix
 ```
 
 ### Conventional commits
 
-ZK-Kit uses [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). We therefore suggest using tools such as [cocogitto](https://docs.cocogitto.io).
+ZK-Kit uses [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).\
+Compliance with these rules is enforced with a `commit-msg` git hook, which was set up when you ran `make setup`.
 
 ### Testing
 
-Test the code:
+To test the code:
 
-```bash
-cargo test --workspace --all-targets
+```commandline
+make test
 ```
 
 ### Build
 
-Build crates:
+To build crates:
 
-```bash
-cargo build --workspace --all-targets
+```commandline
+make build
 ```
