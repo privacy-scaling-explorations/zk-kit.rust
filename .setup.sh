@@ -79,10 +79,47 @@ write_hooks() {
   write_commit_msg_hook
 }
 
+find_editor() {
+  editor=""
+  global_git_editor=$(git config --global --get core.editor || true)
+
+  if [ -n "$global_git_editor" ]; then
+    editor="$global_git_editor"
+  elif [ -n "$EDITOR" ]; then
+    editor="$EDITOR"
+  elif command -v nvim >/dev/null; then
+    editor="nvim"
+  elif command -v vim >/dev/null; then
+    editor="vim"
+  elif command -v vi >/dev/null; then
+    editor="vi"
+  elif command -v code >/dev/null; then
+    editor="code"
+  elif command -v emacs >/dev/null; then
+    editor="emacs"
+  elif command -v nano >/dev/null; then
+    editor="nano"
+  elif command -v notepad >/dev/null; then
+    editor="notepad"
+  fi
+
+  echo "$editor"
+}
+
 integrate_convco_with_git() {
   git config --local core.editor ".cargo/bin/convco commit"
+
   # do not use convco for interactive rebase (git rebase -i)
-  git config --local sequence.editor "$EDITOR"
+  # use system's default editor instead
+  editor=$(find_editor)
+
+  if [ -n "$editor" ]; then
+    git config --local sequence.editor "$editor"
+  else
+    log "${RED}error: No editor found.$RESET"
+    log "Please set the ${ORANGE}EDITOR$RESET environment variable to your preferred editor and run ${ORANGE}make setup$RESET again."
+  fi
+
   log "Integrated convco with git"
 }
 
