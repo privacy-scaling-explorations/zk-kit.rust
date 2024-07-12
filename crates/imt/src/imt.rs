@@ -97,7 +97,7 @@ impl IMT {
         }
 
         let mut node = new_leaf;
-        self.nodes[0][index] = node.clone();
+        self.nodes[0][index].clone_from(&node);
 
         for level in 0..self.depth {
             let position = index % self.arity;
@@ -119,7 +119,7 @@ impl IMT {
             if self.nodes[level + 1].len() <= index {
                 self.nodes[level + 1].push(node.clone());
             } else {
-                self.nodes[level + 1][index] = node.clone();
+                self.nodes[level + 1][index].clone_from(&node);
             }
         }
 
