@@ -23,7 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: taiki-e/cache-cargo-install-action@v2.0.1
+      - name: Install dprint
+        uses: taiki-e/cache-cargo-install-action@v2.0.1
         with:
           tool: dprint
       - run: make check
@@ -42,7 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: taiki-e/cache-cargo-install-action@v2.0.1
+      - name: Install cargo-nextest
+        uses: taiki-e/cache-cargo-install-action@v2.0.1
         with:
           tool: cargo-nextest
       - run: cargo nextest run
