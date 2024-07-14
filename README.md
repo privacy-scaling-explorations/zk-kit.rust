@@ -73,12 +73,12 @@
             </td>
             <td>
                 <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/imt">
-                    <img src="https://img.shields.io/crates/v/zk-kit-rs-imt?style=flat-square" alt="Crate version" />
+                    <img src="https://img.shields.io/crates/v/zk-kit-imt?style=flat-square" alt="Crate version" />
                 </a>
             </td>
             <td>
                 <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/imt">
-                    <img src="https://img.shields.io/crates/d/zk-kit-rs-imt?style=flat-square" alt="Crate downloads" />
+                    <img src="https://img.shields.io/crates/d/zk-kit-imt?style=flat-square" alt="Crate downloads" />
                 </a>
             </td>
             <td>
