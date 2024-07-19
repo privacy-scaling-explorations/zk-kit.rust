@@ -20,7 +20,7 @@ build.docs: ## build the documentation
 	@cargo doc --no-deps --all-features
 
 check: ## check that all files match formatting rules
-	@dprint check
+	@.cargo/bin/dprint check
 
 commit: ## make conventional commit
 	@.cargo/bin/convco commit
@@ -32,7 +32,7 @@ fix: ## apply lint suggestions
 	@cargo clippy --all-targets --all-features --workspace --fix
 
 fmt: ## format all files
-	@dprint fmt
+	@.cargo/bin/dprint fmt
 
 lint: ## lint code
 	@cargo clippy --all-targets --all-features --workspace
