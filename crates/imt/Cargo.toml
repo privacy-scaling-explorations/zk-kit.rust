@@ -1,5 +1,6 @@
 [package]
 name = "zk-kit-imt"
+description = "Incremental Merkle Tree"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
