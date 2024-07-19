@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/v0.0.1) - 2024-07-19
+
+### Added
+- *(imt)* add `imt` crate ([#5](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/5))
+
+### Other
+- *(imt)* release v0.0.1 ([#12](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/12))
+- update list of available crates ([#7](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/7))
+
 ## [0.0.1](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/v0.0.1) - 2024-07-18
 
 ### Added
