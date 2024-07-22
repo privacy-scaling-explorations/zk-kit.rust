@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/v0.0.1...v0.0.2) - 2024-07-22
+
+### Other
+- *(imt)* add README ([#17](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/17))
+
 ## [0.0.1](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/v0.0.1) - 2024-07-18
 
 ### Added
