@@ -1,6 +1,6 @@
 <p align="center">
     <h1 align="center">
-       `zk-kit-imt`
+       zk-kit-imt
     </h1>
     <p align="center">Incremental Merkle tree implementation in Rust.</p>
 </p>
