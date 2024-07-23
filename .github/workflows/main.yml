@@ -23,11 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install dprint
-        uses: taiki-e/cache-cargo-install-action@v2.0.1
-        with:
-          tool: dprint
-      - run: make check
+      - uses: dprint/check@v2.2
 
   lint:
     runs-on: ubuntu-latest
