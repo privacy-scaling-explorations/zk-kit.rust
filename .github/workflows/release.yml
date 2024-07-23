@@ -10,10 +10,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    outputs:
-      pr-branch: echo ${{ steps.release-plz.outputs.pr }} | jq '.head_branch'
-      pr-created: ${{ steps.release-plz.outputs.prs_created }}
-
     steps:
       - uses: actions/checkout@v4
         with:
