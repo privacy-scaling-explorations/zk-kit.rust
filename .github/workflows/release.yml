@@ -10,6 +10,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      pr-branch: steps.release-plz.outputs.head_branch
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,6 +20,7 @@ jobs:
       - name: Install rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - name: Run release-plz
+        id: release-plz
         uses: MarcoIeni/release-plz-action@v0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,10 +28,10 @@ jobs:
 
   fmt:
     needs: release
-    runs-on: ubutun-latest
+    runs-on: ubutu-latest
     steps:
       - uses: fregante/setup-git-user@v2.0.1
       - run: |
           make fmt
           git commit -am 'chore: format files'
-          git push
+          git push origin ${{ needs.release.outputs.pr-branch }}
