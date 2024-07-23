@@ -22,3 +22,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  fmt:
+    needs: release
+    runs-on: ubutun-latest
+    steps:
+      - uses: fregante/setup-git-user@v2.0.1
+      - run: |
+          make fmt
+          git commit -am 'chore: format files'
+          git push
