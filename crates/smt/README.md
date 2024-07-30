@@ -9,8 +9,8 @@
     <a href="https://github.com/privacy-scaling-explorations/zk-kit">
         <img src="https://img.shields.io/badge/project-zk--kit-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/tree/main/packages/imt/LICENSE">
-        <img alt="License" src="https://img.shields.io/crates/l/zk-kit-imt?style=flat-square">
+    <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/tree/main/packages/smt/LICENSE">
+        <img alt="License" src="https://img.shields.io/crates/l/zk-kit-smt?style=flat-square">
     </a>
     <a href="https://crates.io/crates/zk-kit-smt">
         <img alt="Version" src="https://img.shields.io/crates/v/zk-kit-smt?style=flat-square" />
