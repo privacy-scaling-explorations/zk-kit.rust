@@ -48,6 +48,7 @@ cargo add zk-kit-smt
 ```
 
 ## 📜 Usage
+
 ```rust
 use zk_kit_smt::smt::{Key, Node, Value, SMT};
 
@@ -86,5 +87,4 @@ fn main() {
     assert!(delete.is_ok());
     assert_eq!(smt.get(key.clone()), None);
 }
-
 ```
