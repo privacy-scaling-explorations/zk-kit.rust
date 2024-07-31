@@ -86,4 +86,5 @@ fn main() {
     assert!(delete.is_ok());
     assert_eq!(smt.get(key.clone()), None);
 }
+
 ```
