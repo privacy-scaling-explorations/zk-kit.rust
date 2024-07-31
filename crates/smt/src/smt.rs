@@ -134,7 +134,7 @@ impl SMT {
 
         let path = key_to_path(&key.to_string());
         // If there is a matching entry, its node is saved in the `node` variable, otherwise the
-        // `zero_node` is saved. This node is used below as the first node (startning from the
+        // `zero_node` is saved. This node is used below as the first node (starting from the
         // bottom of the tree) to obtain the new nodes up to the root.
         let node = if let Some(ref matching_entry) = matching_entry {
             (self.hash)(matching_entry.clone())
