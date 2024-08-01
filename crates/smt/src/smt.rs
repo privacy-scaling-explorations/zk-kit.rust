@@ -8,6 +8,29 @@ use crate::utils::{
 
 use std::fmt;
 
+#[derive(Debug, PartialEq)]
+pub enum SMTError {
+    KeyAlreadyExist(String),
+    KeyDoesNotExist(String),
+    InvalidParameterType(String, String),
+    InvalidSiblingIndex,
+}
+
+impl fmt::Display for SMTError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            SMTError::KeyAlreadyExist(s) => write!(f, "Key {} already exists", s),
+            SMTError::KeyDoesNotExist(s) => write!(f, "Key {} does not exist", s),
+            SMTError::InvalidParameterType(p, t) => {
+                write!(f, "Parameter {} must be a {}", p, t)
+            },
+            SMTError::InvalidSiblingIndex => write!(f, "Invalid sibling index"),
+        }
+    }
+}
+
+impl std::error::Error for SMTError {}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Node {
     Str(String),
@@ -118,7 +141,7 @@ impl SMT {
     /// # Returns
     ///
     /// An `Result` indicating whether the operation was successful or not.
-    pub fn add(&mut self, key: Key, value: Value) -> Result<(), &'static str> {
+    pub fn add(&mut self, key: Key, value: Value) -> Result<(), SMTError> {
         self.check_parameter_type(&key.to_string()).unwrap();
         self.check_parameter_type(&value.to_string()).unwrap();
 
@@ -129,7 +152,7 @@ impl SMT {
         } = self.retrieve_entry(key.clone());
 
         if entry.get(1).is_some() {
-            return Err("Key already exists");
+            return Err(SMTError::KeyAlreadyExist(key.to_string()));
         }
 
         let path = key_to_path(&key.to_string());
@@ -188,7 +211,7 @@ impl SMT {
     /// # Returns
     ///
     /// An `Result` indicating whether the operation was successful or not.
-    pub fn update(&mut self, key: Key, value: Value) -> Result<(), &'static str> {
+    pub fn update(&mut self, key: Key, value: Value) -> Result<(), SMTError> {
         self.check_parameter_type(&key.to_string()).unwrap();
         self.check_parameter_type(&value.to_string()).unwrap();
 
@@ -197,7 +220,7 @@ impl SMT {
         } = self.retrieve_entry(key.clone());
 
         if entry.get(1).is_none() {
-            return Err("Key does not exist");
+            return Err(SMTError::KeyDoesNotExist(key.to_string()));
         }
 
         let path = key_to_path(&key.to_string());
@@ -229,7 +252,7 @@ impl SMT {
     /// # Returns
     ///
     /// An `Result` indicating whether the operation was successful or not.
-    pub fn delete(&mut self, key: Key) -> Result<(), &'static str> {
+    pub fn delete(&mut self, key: Key) -> Result<(), SMTError> {
         self.check_parameter_type(&key.to_string()).unwrap();
 
         let EntryResponse {
@@ -239,7 +262,7 @@ impl SMT {
         } = self.retrieve_entry(key.clone());
 
         if entry.get(1).is_none() {
-            return Err("Key does not exist");
+            return Err(SMTError::KeyDoesNotExist(key.to_string()));
         }
 
         let path = key_to_path(&key.to_string());
@@ -375,13 +398,19 @@ impl SMT {
     /// # Errors
     ///
     /// Returns an error if the parameter type is invalid based on the SMT configuration.
-    fn check_parameter_type(&self, parameter: &str) -> Result<(), &'static str> {
+    fn check_parameter_type(&self, parameter: &str) -> Result<(), SMTError> {
         if self.big_numbers && parameter.parse::<BigInt>().is_err() {
-            return Err("Parameter must be a big number");
+            return Err(SMTError::InvalidParameterType(
+                parameter.to_string(),
+                "big number".to_string(),
+            ));
         }
 
         if !self.big_numbers && !is_hexadecimal(parameter) {
-            return Err("Parameter must be a hexadecimal string");
+            return Err(SMTError::InvalidParameterType(
+                parameter.to_string(),
+                "hexadecimal".to_string(),
+            ));
         }
 
         Ok(())
@@ -498,7 +527,7 @@ impl SMT {
         path: &[usize],
         siblings: &Siblings,
         i: Option<isize>,
-    ) -> Result<Node, &'static str> {
+    ) -> Result<Node, SMTError> {
         let mut starting_index = if let Some(i) = i {
             i
         } else {
@@ -507,7 +536,7 @@ impl SMT {
 
         while starting_index > 0 {
             if siblings.get(starting_index as usize).is_none() {
-                return Err("Invalid sibling index");
+                return Err(SMTError::InvalidSiblingIndex);
             }
 
             let child_nodes: ChildNodes = if path.get(starting_index as usize).is_some() {
@@ -660,7 +689,7 @@ mod tests {
 
         let key2 = Key::Str("def".to_string());
         let result2 = smt.update(key2.clone(), new_value.clone());
-        assert_eq!(result2, Err("Key does not exist"));
+        assert_eq!(result2, Err(SMTError::KeyDoesNotExist(key2.to_string())));
 
         let mut smt = SMT::new(hash_function, true);
         let key = Key::BigInt(BigInt::from(123));
@@ -694,7 +723,7 @@ mod tests {
 
         let key2 = Key::Str("def".to_string());
         let result2 = smt.delete(key2.clone());
-        assert_eq!(result2, Err("Key does not exist"));
+        assert_eq!(result2, Err(SMTError::KeyDoesNotExist(key2.to_string())));
 
         let mut smt = SMT::new(hash_function, true);
         let key = Key::BigInt(BigInt::from(123));
