@@ -9,8 +9,8 @@ fn main() {
     // Initialize the Sparse Merkle Tree with a hash function.
     let mut smt = SMT::new(hash_function, false);
 
-    let key = Key::Str("abc".to_string());
-    let value = Value::Str("123".to_string());
+    let key = Key::Str("aaa".to_string());
+    let value = Value::Str("bbb".to_string());
 
     // Add a key-value pair to the Sparse Merkle Tree.
     smt.add(key.clone(), value.clone()).unwrap();
@@ -20,7 +20,7 @@ fn main() {
     assert_eq!(get, Some(value));
 
     // Update the value of the key.
-    let new_value = Value::Str("456".to_string());
+    let new_value = Value::Str("ccc".to_string());
     let update = smt.update(key.clone(), new_value.clone());
     assert!(update.is_ok());
     assert_eq!(smt.get(key.clone()), Some(new_value));
