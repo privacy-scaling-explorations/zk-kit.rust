@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, str::FromStr};
 
 use num_bigint::BigInt;
 
@@ -46,6 +46,23 @@ impl fmt::Display for Node {
     }
 }
 
+impl FromStr for Node {
+    type Err = SMTError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if let Ok(bigint) = s.parse::<BigInt>() {
+            Ok(Node::BigInt(bigint))
+        } else if is_hexadecimal(s) {
+            Ok(Node::Str(s.to_string()))
+        } else {
+            Err(SMTError::InvalidParameterType(
+                s.to_string(),
+                "BigInt or hexadecimal string".to_string(),
+            ))
+        }
+    }
+}
+
 pub type Key = Node;
 pub type Value = Node;
 pub type EntryMark = Node;
@@ -69,6 +86,7 @@ pub struct MerkleProof {
     membership: bool,
 }
 
+#[allow(dead_code)]
 pub struct SMT {
     hash: HashFunction,
     big_numbers: bool,
@@ -121,7 +139,7 @@ impl SMT {
     ///
     /// An `Option` containing the value associated with the key, or `None` if the key does not exist.
     pub fn get(&self, key: Key) -> Option<Value> {
-        self.check_parameter_type(key.to_string().as_str()).unwrap();
+        let key = key.to_string().parse::<Node>().unwrap();
 
         let EntryResponse { entry, .. } = self.retrieve_entry(key);
 
@@ -142,8 +160,8 @@ impl SMT {
     ///
     /// An `Result` indicating whether the operation was successful or not.
     pub fn add(&mut self, key: Key, value: Value) -> Result<(), SMTError> {
-        self.check_parameter_type(&key.to_string()).unwrap();
-        self.check_parameter_type(&value.to_string()).unwrap();
+        let key = key.to_string().parse::<Node>().unwrap();
+        let value = value.to_string().parse::<Node>().unwrap();
 
         let EntryResponse {
             entry,
@@ -212,8 +230,8 @@ impl SMT {
     ///
     /// An `Result` indicating whether the operation was successful or not.
     pub fn update(&mut self, key: Key, value: Value) -> Result<(), SMTError> {
-        self.check_parameter_type(&key.to_string()).unwrap();
-        self.check_parameter_type(&value.to_string()).unwrap();
+        let key = key.to_string().parse::<Node>().unwrap();
+        let value = value.to_string().parse::<Node>().unwrap();
 
         let EntryResponse {
             entry, siblings, ..
@@ -253,7 +271,7 @@ impl SMT {
     ///
     /// An `Result` indicating whether the operation was successful or not.
     pub fn delete(&mut self, key: Key) -> Result<(), SMTError> {
-        self.check_parameter_type(&key.to_string()).unwrap();
+        let key = key.to_string().parse::<Node>().unwrap();
 
         let EntryResponse {
             entry,
@@ -312,7 +330,7 @@ impl SMT {
     ///
     /// A `MerkleProof` containing the proof information.
     pub fn create_proof(&self, key: Key) -> MerkleProof {
-        self.check_parameter_type(&key.to_string()).unwrap();
+        let key = key.to_string().parse::<Node>().unwrap();
 
         let EntryResponse {
             entry,
@@ -383,37 +401,6 @@ impl SMT {
         }
 
         false
-    }
-
-    /// Checks the type of the parameter based on the SMT configuration.
-    ///
-    /// # Arguments
-    ///
-    /// * `parameter` - The parameter to check the type for.
-    ///
-    /// # Returns
-    ///
-    /// An `Result` indicating whether the parameter type is valid or not.
-    ///
-    /// # Errors
-    ///
-    /// Returns an error if the parameter type is invalid based on the SMT configuration.
-    fn check_parameter_type(&self, parameter: &str) -> Result<(), SMTError> {
-        if self.big_numbers && parameter.parse::<BigInt>().is_err() {
-            return Err(SMTError::InvalidParameterType(
-                parameter.to_string(),
-                "big number".to_string(),
-            ));
-        }
-
-        if !self.big_numbers && !is_hexadecimal(parameter) {
-            return Err(SMTError::InvalidParameterType(
-                parameter.to_string(),
-                "hexadecimal".to_string(),
-            ));
-        }
-
-        Ok(())
     }
 
     /// Retrieves the entry associated with the given key from the SMT.
@@ -625,13 +612,14 @@ mod tests {
     #[test]
     fn test_get() {
         let mut smt = SMT::new(hash_function, false);
-        let key = Key::Str("abc".to_string());
-        let value = Value::Str("123".to_string());
+        let key = Key::Str("aaa".to_string());
+        let value = Value::Str("bbb".to_string());
         let _ = smt.add(key.clone(), value.clone());
         let result = smt.get(key.clone());
+        println!("{:?}", result);
         assert_eq!(result, Some(value));
 
-        let key2 = Key::Str("def".to_string());
+        let key2 = Key::Str("ccc".to_string());
         let result2 = smt.get(key2.clone());
         assert_eq!(result2, None);
 
@@ -645,8 +633,8 @@ mod tests {
     #[test]
     fn test_add() {
         let mut smt = SMT::new(hash_function, false);
-        let key = Key::Str("abc".to_string());
-        let value = Value::Str("123".to_string());
+        let key = Key::Str("aaa".to_string());
+        let value = Value::Str("bbb".to_string());
         let result = smt.add(key.clone(), value.clone());
         assert!(result.is_ok());
         assert_eq!(smt.nodes.len(), 1);
@@ -670,11 +658,11 @@ mod tests {
     #[test]
     fn test_update() {
         let mut smt = SMT::new(hash_function, false);
-        let key = Key::Str("abc".to_string());
-        let value = Value::Str("123".to_string());
+        let key = Key::Str("aaa".to_string());
+        let value = Value::Str("bbb".to_string());
         let _ = smt.add(key.clone(), value.clone());
 
-        let new_value = Value::Str("456".to_string());
+        let new_value = Value::Str("ccc".to_string());
         let result = smt.update(key.clone(), new_value.clone());
         assert!(result.is_ok());
         assert_eq!(smt.nodes.len(), 1);
@@ -795,21 +783,6 @@ mod tests {
         };
         let fun = smt.verify_proof(false_proof);
         assert!(!fun);
-    }
-
-    #[test]
-    fn test_check_parameter_type() {
-        let smt = SMT::new(hash_function, false);
-        let result = smt.check_parameter_type("123");
-        assert!(result.is_ok());
-
-        let smt = SMT::new(hash_function, true);
-        let result = smt.check_parameter_type("123");
-        assert!(result.is_ok());
-
-        let smt = SMT::new(hash_function, true);
-        let fun = smt.check_parameter_type("abc");
-        assert!(fun.is_err());
     }
 
     #[test]
