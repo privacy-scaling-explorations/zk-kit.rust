@@ -64,7 +64,6 @@
         </tr>
     </thead>
     <tbody>
-        <!-- not published yet -->
         <tr>
             <td>
                 <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/tree/main/crates/imt">
@@ -72,13 +71,33 @@
                 </a>
             </td>
             <td>
-                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/imt">
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_imt">
                     <img src="https://img.shields.io/crates/v/zk-kit-imt?style=flat-square" alt="Crate version" />
                 </a>
             </td>
             <td>
-                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/imt">
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_imt">
                     <img src="https://img.shields.io/crates/d/zk-kit-imt?style=flat-square" alt="Crate downloads" />
+                </a>
+            </td>
+            <td>
+                ❌
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/tree/main/crates/smt">
+                    smt
+                </a>
+            </td>
+            <td>
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_smt">
+                    <img src="https://img.shields.io/crates/v/zk-kit-smt?style=flat-square" alt="Crate version" />
+                </a>
+            </td>
+            <td>
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_smt">
+                    <img src="https://img.shields.io/crates/d/zk-kit-smt?style=flat-square" alt="Crate downloads" />
                 </a>
             </td>
             <td>
