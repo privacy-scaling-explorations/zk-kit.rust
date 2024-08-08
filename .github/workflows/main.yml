@@ -39,8 +39,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install cargo-nextest
-        uses: taiki-e/cache-cargo-install-action@v2.0.1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2.7.3
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@v2.42.0
         with:
-          tool: cargo-nextest
-      - run: cargo nextest run
+          tool: cargo-llvm-cov
+      - name: Run tests with coverage report
+        run: cargo llvm-cov --all-features --all-targets --lcov --workspace --output-path lcov.info
+      - name: Upload test coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov.info
+          path: lcov.info
+
+  coverage:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: lcov.info
+          path: .
+      - uses: coverallsapp/github-action@v2.3.0
+        with:
+          base-path: /
+          file: lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -5,7 +5,7 @@ CYAN := \033[36m
 RESET := \033[0m
 PATH := $(DEV_BIN_DIR):$(PATH)
 
-.PHONY: help build build.docs fix fmt lint setup test
+.PHONY: help build build.docs check commit coverage docs fix fmt lint setup test
 
 help: ## display this help message (default task)
 	@printf "%b\n" "Usage: make [$(CYAN)task$(RESET)]"
@@ -25,6 +25,9 @@ check: ## check that all files match formatting rules
 commit: ## make conventional commit
 	@PATH=$(PATH) convco commit
 
+coverage: ## generate coverage report
+	@PATH=$(PATH) cargo llvm-cov --all-features report
+
 docs: ## build & open the documentation in the browser
 	@cargo doc --no-deps --open --all-features
 
@@ -41,4 +44,4 @@ setup: ## run the setup script to install dependencies
 	@./.setup.sh
 
 test: ## run all tests
-	@cargo-nextest ntr
+	@cargo-nextest ntr --all-features --all-targets --workspace
