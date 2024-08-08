@@ -38,7 +38,7 @@ maybe_install_local() {
 
 install_dev_deps() {
   log "Installing development dependencies..."
-  crates="convco dprint cargo-nextest"
+  crates="convco dprint cargo-llvm-cov cargo-nextest"
 
   for crate in $crates; do
     maybe_install_local "$crate"
