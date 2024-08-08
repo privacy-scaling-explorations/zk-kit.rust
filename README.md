@@ -17,7 +17,10 @@
         <img alt="Github license" src="https://img.shields.io/github/license/privacy-scaling-explorations/zk-kit.rust.svg?style=flat-square">
     </a>
     <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/actions?query=workflow%3Amain">
-        <img alt="GitHub Main Workflow" src="https://img.shields.io/github/actions/workflow/status/privacy-scaling-explorations/zk-kit.rust/main.yml?branch=main&label=main&style=flat-square&logo=github">
+        <img alt="GitHub Main Workflow" src="https://img.shields.io/github/actions/workflow/status/privacy-scaling-explorations/zk-kit.rust/main.yml?branch=main&label=tests&style=flat-square&logo=github">
+    </a>
+    <a href='https://coveralls.io/github/privacy-scaling-explorations/zk-kit.rust?branch=main'>
+        <img src='https://coveralls.io/repos/github/privacy-scaling-explorations/zk-kit.rust/badge.svg?branch=main' alt='Coverage Status' />
     </a>
 </p>
 
