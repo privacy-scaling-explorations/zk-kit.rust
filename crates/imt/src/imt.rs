@@ -73,6 +73,14 @@ impl IMT {
         self.depth
     }
 
+    pub fn nodes(&self) -> Vec<Vec<IMTNode>> {
+        self.nodes.clone()
+    }
+
+    pub fn zeroes(&self) -> Vec<IMTNode> {
+        self.zeroes.clone()
+    }
+
     pub fn leaves(&self) -> Vec<IMTNode> {
         self.nodes[0].clone()
     }
