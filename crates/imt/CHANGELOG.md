@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-imt-v0.0.5...zk-kit-imt-v0.0.6) - 2024-09-04
+
+### Other
+- *(imt)* Add methods to retrieve nodes and zeroes in IMT ([#50](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/50))
+
 ## [0.0.5](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-imt-v0.0.4...zk-kit-imt-v0.0.5) - 2024-08-06
 
 ### Other
