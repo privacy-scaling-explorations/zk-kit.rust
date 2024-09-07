@@ -4,7 +4,7 @@ use std::fs;
 use tiny_keccak::{Hasher as _, Keccak};
 use zk_kit_pmt::*;
 
-struct MyKeccak(Keccak);
+struct MyKeccak(());
 struct MySled(sled::Db);
 
 #[derive(Default)]

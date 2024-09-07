@@ -4,7 +4,7 @@ use tiny_keccak::{Hasher as _, Keccak};
 use zk_kit_pmt::*;
 
 struct MemoryDB(HashMap<DBKey, Value>);
-struct MyKeccak(Keccak);
+struct MyKeccak(());
 
 #[derive(Default)]
 struct MemoryDBConfig;
@@ -33,7 +33,7 @@ impl Database for MemoryDB {
     }
 
     fn put_batch(&mut self, subtree: HashMap<DBKey, Value>) -> PmtreeResult<()> {
-        self.0.extend(subtree.into_iter());
+        self.0.extend(subtree);
 
         Ok(())
     }
