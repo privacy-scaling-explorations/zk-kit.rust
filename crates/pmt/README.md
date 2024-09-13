@@ -1,8 +1,8 @@
 <p align="center">
     <h1 align="center">
-        Sparse Merkle tree
+        Persistent Merkle Tree
     </h1>
-    <p align="center">Sparse Merkle tree implementation in Rust.</p>
+    <p align="center">Persistent Merkle Tree (optimized & sparse & fixed-size) in Rust.</p>
 </p>
 
 <div align="center">
@@ -12,8 +12,6 @@
         </a>
     </h4>
 </div>
-
-Generic for storage Merkle Tree (sparse & fixed-size) in Rust.
 
 ## References
 
