@@ -1,0 +1,16 @@
+[package]
+name = "zk-kit-pmt"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Generic for storage Merkle Tree (sparse & fixed-size) in Rust"
+
+[dependencies]
+rayon = { version = "=1.7.0", optional = false }
+
+[dev-dependencies]
+ark-serialize = "=0.3.0"
+hex-literal = "=0.3.4"
+sled = "=0.34.7"
+tiny-keccak = { version = "=2.0.2", features = ["keccak"] }
