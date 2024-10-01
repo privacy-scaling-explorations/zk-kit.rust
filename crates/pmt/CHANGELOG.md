@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.1](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-pmt-v0.1.0...zk-kit-pmt-v0.1.1) - 2024-10-01
 
 ### Other
-- *(zk-kit-pmt)* release v0.1.0 ([#54](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/54))
+
+- _(zk-kit-pmt)_ release v0.1.0 ([#54](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/54))
 
 ## [0.1.0](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/zk-kit-pmt-v0.1.0) - 2024-10-01
 
