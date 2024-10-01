@@ -107,6 +107,26 @@
                 ❌
             </td>
         </tr>
+        <tr>
+            <td>
+                <a href="https://github.com/privacy-scaling-explorations/zk-kit.rust/tree/main/crates/pmt">
+                    pmt
+                </a>
+            </td>
+            <td>
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_pmt">
+                    <img src="https://img.shields.io/crates/v/zk-kit-pmt?style=flat-square" alt="Crate version" />
+                </a>
+            </td>
+            <td>
+                <a href="https://privacy-scaling-explorations.github.io/zk-kit.rust/zk_kit_pmt">
+                    <img src="https://img.shields.io/crates/d/zk-kit-pmt?style=flat-square" alt="Crate downloads" />
+                </a>
+            </td>
+            <td>
+                ❌
+            </td>
+        </tr>
     <tbody>
 </table>
 
