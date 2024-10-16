@@ -388,7 +388,7 @@ impl SMT {
             let root =
                 self.calculate_root(node, &matching_path, &merkle_proof.entry_response.siblings);
 
-            if root == merkle_proof.root {
+            if merkle_proof.membership == (root == merkle_proof.root) {
                 let path = key_to_path(&merkle_proof.entry_response.entry[0].to_string());
                 // Returns the first common bits of the two keys: the non-member key and the matching key.
                 let first_matching_bits = get_first_common_elements(&path, &matching_path);
@@ -616,7 +616,6 @@ mod tests {
         let value = Value::Str("bbb".to_string());
         let _ = smt.add(key.clone(), value.clone());
         let result = smt.get(key.clone());
-        println!("{:?}", result);
         assert_eq!(result, Some(value));
 
         let key2 = Key::Str("ccc".to_string());
