@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.6](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-smt-v0.0.5...zk-kit-smt-v0.0.6) - 2024-10-18
 
 ### Fixed
-- *(smt)* fix verify proof membership ([#60](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/60))
+
+- _(smt)_ fix verify proof membership ([#60](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/60))
 
 ## [0.0.5](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-smt-v0.0.4...zk-kit-smt-v0.0.5) - 2024-08-06
 
