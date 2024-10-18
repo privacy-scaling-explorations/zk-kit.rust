@@ -438,7 +438,7 @@ dependencies = [
 
 [[package]]
 name = "zk-kit-smt"
-version = "0.0.5"
+version = "0.0.6"
 dependencies = [
  "num-bigint",
 ]
