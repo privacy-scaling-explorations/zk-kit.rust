@@ -37,7 +37,7 @@ zk-kit-lean-imt = { git = "https://github.com/privacy-scaling-explorations/zk-ki
 ## 📜 Usage
 
 ```rust
-use zk_kit_lean_imt::hashed_tree::{LeanIMTHasher, HashedLeanIMT};
+use zk_kit_lean_imt::hashed_tree::{HashedLeanIMT, LeanIMTHasher};
 
 // Setup hasher
 struct SampleHasher;
