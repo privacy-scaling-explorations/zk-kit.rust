@@ -42,24 +42,28 @@ impl IMT {
             current_zero = (imt.hash)(vec![current_zero; arity]);
         }
 
-        imt.nodes[0] = leaves;
+        imt.nodes[0] = leaves.clone();
 
-        for level in 0..depth {
-            for index in 0..((imt.nodes[level].len() as f64 / arity as f64).ceil() as usize) {
-                let position = index * arity;
-                let children: Vec<_> = (0..arity)
-                    .map(|i| {
-                        imt.nodes[level]
-                            .get(position + i)
-                            .cloned()
-                            .unwrap_or_else(|| imt.zeroes[level].clone())
-                    })
-                    .collect();
+        if leaves.len() > 0 {
+            for level in 0..depth {
+                for index in 0..((imt.nodes[level].len() as f64 / arity as f64).ceil() as usize) {
+                    let position = index * arity;
+                    let children: Vec<_> = (0..arity)
+                        .map(|i| {
+                            imt.nodes[level]
+                                .get(position + i)
+                                .cloned()
+                                .unwrap_or_else(|| imt.zeroes[level].clone())
+                        })
+                        .collect();
 
-                if let Some(next_level) = imt.nodes.get_mut(level + 1) {
-                    next_level.push((imt.hash)(children));
+                    if let Some(next_level) = imt.nodes.get_mut(level + 1) {
+                        next_level.push((imt.hash)(children));
+                    }
                 }
             }
+        } else {
+            imt.nodes[imt.depth] = vec![current_zero];
         }
 
         Ok(imt)
