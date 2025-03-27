@@ -198,6 +198,8 @@ impl IMT {
 
 #[cfg(test)]
 mod tests {
+    use std::str::FromStr;
+
     use super::*;
 
     fn simple_hash_function(nodes: Vec<String>) -> String {
@@ -205,11 +207,64 @@ mod tests {
     }
 
     #[test]
-    fn test_new_imt() {
+    fn test_new_imt_without_leaves() {
         let hash: IMTHashFunction = simple_hash_function;
         let imt = IMT::new(hash, 3, "zero".to_string(), 2, vec![]);
 
         assert!(imt.is_ok());
+        assert_eq!(imt.as_ref().unwrap().nodes().get(0), Some(&vec![]));
+        assert_eq!(imt.as_ref().unwrap().nodes().get(1), Some(&vec![]));
+        assert_eq!(imt.as_ref().unwrap().nodes().get(2), Some(&vec![]));
+        assert_eq!(
+            imt.as_ref().unwrap().nodes().get(3),
+            Some(&vec!["zero,zero,zero,zero,zero,zero,zero,zero".to_string()])
+        );
+    }
+
+    #[test]
+    fn test_new_imt_with_leaves() {
+        let hash: IMTHashFunction = simple_hash_function;
+        let imt = IMT::new(
+            hash,
+            3,
+            "zero".to_string(),
+            2,
+            vec![
+                String::from_str("1").unwrap(),
+                String::from_str("2").unwrap(),
+                String::from_str("3").unwrap(),
+                String::from_str("4").unwrap(),
+                String::from_str("5").unwrap(),
+            ],
+        );
+
+        assert!(imt.is_ok());
+        assert_eq!(
+            imt.as_ref().unwrap().nodes().get(0),
+            Some(&vec![
+                "1".to_string(),
+                "2".to_string(),
+                "3".to_string(),
+                "4".to_string(),
+                "5".to_string()
+            ])
+        );
+        assert_eq!(
+            imt.as_ref().unwrap().nodes().get(1),
+            Some(&vec![
+                "1,2".to_string(),
+                "3,4".to_string(),
+                "5,zero".to_string()
+            ])
+        );
+        assert_eq!(
+            imt.as_ref().unwrap().nodes().get(2),
+            Some(&vec!["1,2,3,4".to_string(), "5,zero,zero,zero".to_string()])
+        );
+        assert_eq!(
+            imt.as_ref().unwrap().nodes().get(3),
+            Some(&vec!["1,2,3,4,5,zero,zero,zero".to_string()])
+        );
     }
 
     #[test]
