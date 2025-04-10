@@ -34,56 +34,6 @@ where
         Self { tree, hasher }
     }
 
-    /// Generates a Merkle proof for a leaf at the given index.
-    pub fn generate_proof(&self, index: usize) -> Result<MerkleProof<N>, LeanIMTError> {
-        self.tree.generate_proof(index)
-    }
-
-    /// Verifies a Merkle proof.
-    pub fn verify_proof(proof: &MerkleProof<N>) -> bool {
-        LeanIMT::verify_proof(proof, H::hash)
-    }
-
-    /// Returns the root, if it exists.
-    pub fn root(&self) -> Option<[u8; N]> {
-        self.tree.root()
-    }
-
-    /// Returns the tree depth.
-    pub fn depth(&self) -> usize {
-        self.tree.depth()
-    }
-
-    /// Returns the leaves.
-    pub fn leaves(&self) -> &[[u8; N]] {
-        self.tree.leaves()
-    }
-
-    /// Returns the number of leaves.
-    pub fn size(&self) -> usize {
-        self.tree.size()
-    }
-
-    /// Returns the index of a leaf, if it exists.
-    pub fn index_of(&self, leaf: &[u8]) -> Option<usize> {
-        self.tree.index_of(leaf)
-    }
-
-    /// Checks if a leaf exists.
-    pub fn contains(&self, leaf: &[u8]) -> bool {
-        self.tree.contains(leaf)
-    }
-
-    /// Returns the leaf at the given index.
-    pub fn get_leaf(&self, index: usize) -> Result<[u8; N], LeanIMTError> {
-        self.tree.get_leaf(index)
-    }
-
-    /// Returns the node at the given level and index.
-    pub fn get_node(&self, level: usize, index: usize) -> Result<[u8; N], LeanIMTError> {
-        self.tree.get_node(level, index)
-    }
-
     /// Inserts a single leaf.
     pub fn insert(&mut self, leaf: &[u8; N]) {
         self.tree.insert(leaf, H::hash)
@@ -97,6 +47,56 @@ where
     /// Updates a leaf at the given index.
     pub fn update(&mut self, index: usize, new_leaf: &[u8; N]) -> Result<(), LeanIMTError> {
         self.tree.update(index, new_leaf, H::hash)
+    }
+
+    /// Generates a Merkle proof for a leaf at the given index.
+    pub fn generate_proof(&self, index: usize) -> Result<MerkleProof<N>, LeanIMTError> {
+        self.tree.generate_proof(index)
+    }
+
+    /// Verifies a Merkle proof.
+    pub fn verify_proof(proof: &MerkleProof<N>) -> bool {
+        LeanIMT::verify_proof(proof, H::hash)
+    }
+
+    /// Returns the leaves.
+    pub fn leaves(&self) -> &[[u8; N]] {
+        self.tree.leaves()
+    }
+
+    /// Returns the number of leaves in the tree.
+    pub fn size(&self) -> usize {
+        self.tree.size()
+    }
+
+    /// Returns the tree root, if it exists.
+    pub fn root(&self) -> Option<[u8; N]> {
+        self.tree.root()
+    }
+
+    /// Returns the tree depth.
+    pub fn depth(&self) -> usize {
+        self.tree.depth()
+    }
+
+    /// Retrieves a leaf at the given index.
+    pub fn get_leaf(&self, index: usize) -> Result<[u8; N], LeanIMTError> {
+        self.tree.get_leaf(index)
+    }
+
+    /// Retrieves the node at a specified level and index.
+    pub fn get_node(&self, level: usize, index: usize) -> Result<[u8; N], LeanIMTError> {
+        self.tree.get_node(level, index)
+    }
+
+    /// Finds the index of a given leaf, if it exists.
+    pub fn index_of(&self, leaf: &[u8]) -> Option<usize> {
+        self.tree.index_of(leaf)
+    }
+
+    /// Checks whether the tree contains the specified leaf.
+    pub fn contains(&self, leaf: &[u8]) -> bool {
+        self.tree.contains(leaf)
     }
 
     /// Returns the tree.

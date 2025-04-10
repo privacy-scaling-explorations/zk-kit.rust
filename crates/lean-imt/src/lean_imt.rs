@@ -8,7 +8,7 @@
 use thiserror::Error;
 
 /// LeanIMT struct.
-#[derive(Debug, Default, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(
     feature = "serde",
     derive(serde::Serialize, serde::Deserialize),
@@ -22,12 +22,18 @@ pub struct LeanIMT<const N: usize> {
     nodes: Vec<Vec<[u8; N]>>,
 }
 
+impl<const N: usize> Default for LeanIMT<N> {
+    fn default() -> Self {
+        Self {
+            nodes: vec![Vec::new()],
+        }
+    }
+}
+
 impl<const N: usize> LeanIMT<N> {
     /// Creates a new tree with optional initial leaves.
     pub fn new(leaves: &[[u8; N]], hash: impl Fn(&[u8]) -> [u8; N]) -> Result<Self, LeanIMTError> {
-        let mut imt = Self {
-            nodes: vec![Vec::new()],
-        };
+        let mut imt = Self::default();
 
         match leaves.len() {
             0 => {},
@@ -383,9 +389,7 @@ mod tests {
             tree_iter.insert(leaf, hash);
         }
 
-        // Both trees should have the same root and size.
-        assert_eq!(tree_from_batch.root(), tree_iter.root());
-        assert_eq!(tree_from_batch.size(), tree_iter.size());
+        assert_eq!(tree_from_batch, tree_iter);
     }
 
     #[test]
