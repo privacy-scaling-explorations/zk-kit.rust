@@ -230,58 +230,57 @@ impl<const N: usize> LeanIMT<N> {
         proof.root == node
     }
 
-    /// Returns the root, if it exists.
+    /// Returns the leaves.
+    pub fn leaves(&self) -> &[[u8; N]] {
+        if self.nodes.is_empty() {
+            &[]
+        } else {
+            &self.nodes[0]
+        }
+    }
+
+    /// Returns the number of leaves in the tree.
+    pub fn size(&self) -> usize {
+        self.leaves().len()
+    }
+
+    /// Returns the tree root, if it exists.
     pub fn root(&self) -> Option<[u8; N]> {
-        self.nodes.last().and_then(|level| level.first()).copied()
+        self.nodes.last()?.first().copied()
     }
 
     /// Returns the tree depth.
     pub fn depth(&self) -> usize {
-        if self.nodes.is_empty() {
-            0
-        } else {
-            self.nodes.len() - 1
-        }
+        self.nodes.len().saturating_sub(1)
     }
 
-    /// Returns the leaf at the given index.
+    /// Retrieves a leaf at the given index.
     pub fn get_leaf(&self, index: usize) -> Result<[u8; N], LeanIMTError> {
-        if index >= self.size() {
-            return Err(LeanIMTError::IndexOutOfBounds);
-        }
-
-        Ok(self.leaves()[index])
+        self.leaves()
+            .get(index)
+            .copied()
+            .ok_or(LeanIMTError::IndexOutOfBounds)
     }
 
-    /// Returns the node at the given level and index.
+    /// Retrieves the node at a specified level and index.
     pub fn get_node(&self, level: usize, index: usize) -> Result<[u8; N], LeanIMTError> {
-        if level >= self.nodes.len() {
-            return Err(LeanIMTError::LevelOutOfBounds);
-        }
+        let level_vec = self
+            .nodes
+            .get(level)
+            .ok_or(LeanIMTError::LevelOutOfBounds)?;
 
-        if index >= self.nodes[level].len() {
-            return Err(LeanIMTError::IndexOutOfBounds);
-        }
-
-        Ok(self.nodes[level][index])
+        level_vec
+            .get(index)
+            .copied()
+            .ok_or(LeanIMTError::IndexOutOfBounds)
     }
 
-    /// Returns the leaves.
-    pub fn leaves(&self) -> &[[u8; N]] {
-        self.nodes[0].as_slice()
-    }
-
-    /// Returns the number of leaves.
-    pub fn size(&self) -> usize {
-        self.nodes[0].len()
-    }
-
-    /// Returns the index of a leaf, if it exists.
+    /// Finds the index of a given leaf, if it exists.
     pub fn index_of(&self, leaf: &[u8]) -> Option<usize> {
         self.leaves().iter().position(|x| x == leaf)
     }
 
-    /// Checks if a leaf exists.
+    /// Checks whether the tree contains the specified leaf.
     pub fn contains(&self, leaf: &[u8]) -> bool {
         self.index_of(leaf).is_some()
     }
@@ -356,6 +355,11 @@ mod tests {
 
         assert_eq!(tree.size(), 0);
         assert_eq!(tree.root(), None);
+        assert_eq!(tree.depth(), 0);
+
+        let leaves: &[[u8; 4]] = tree.leaves();
+        let empty_leaves: &[[u8; 4]] = &[];
+        assert_eq!(leaves, empty_leaves);
     }
 
     #[test]
