@@ -578,7 +578,7 @@ dependencies = [
 
 [[package]]
 name = "zk-kit-pmt"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "ark-serialize",
  "hex-literal",
@@ -589,7 +589,7 @@ dependencies = [
 
 [[package]]
 name = "zk-kit-smt"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "num-bigint",
 ]
