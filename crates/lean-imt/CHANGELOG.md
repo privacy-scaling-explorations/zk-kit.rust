@@ -10,5 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/zk-kit-lean-imt-v0.1.0) - 2025-04-24
 
 ### Added
+- customizable `LeanIMT` implementation ([#62](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/62))
+
+### Other
+- release ([#70](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/70))
+
+## [0.1.0](https://github.com/privacy-scaling-explorations/zk-kit.rust/releases/tag/zk-kit-lean-imt-v0.1.0) - 2025-04-24
+
+### Added
 
 - customizable `LeanIMT` implementation ([#62](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/62))
