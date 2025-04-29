@@ -268,6 +268,11 @@ impl<const N: usize> LeanIMT<N> {
             .ok_or(LeanIMTError::IndexOutOfBounds)
     }
 
+    /// Returns the internal nodes structure.
+    pub fn nodes(&self) -> &[Vec<[u8; N]>] {
+        &self.nodes
+    }
+
     /// Retrieves the node at a specified level and index.
     pub fn get_node(&self, level: usize, index: usize) -> Result<[u8; N], LeanIMTError> {
         let level_vec = self
