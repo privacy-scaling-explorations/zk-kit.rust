@@ -37,9 +37,9 @@ cargo add zk-kit-lean-imt
 ## 📜 Usage
 
 ```rust
+use lean_imt::hashed_tree::{HashedLeanIMT, LeanIMTHasher};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
-use lean_imt::hashed_tree::{HashedLeanIMT, LeanIMTHasher};
 
 // Setup hasher
 struct SampleHasher;
