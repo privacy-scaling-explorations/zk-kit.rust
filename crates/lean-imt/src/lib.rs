@@ -4,10 +4,10 @@
 //!
 //! ## Quick Start
 //!
-//! Add the crate to your Cargo.toml:
+//! Install the `zk-kit-lean-imt` crate with `cargo`:
 //!
-//! ```toml
-//! zk-kit-lean-imt = { git = "https://github.com/privacy-scaling-explorations/zk-kit.rust", package = "zk-kit-lean-imt" }
+//! ```commandline
+//! cargo add zk-kit-lean-imt
 //! ```
 //!
 //! ## Example

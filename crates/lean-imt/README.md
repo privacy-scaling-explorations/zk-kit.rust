@@ -28,18 +28,18 @@ The LeanIMT is an optimized binary version of the [IMT](https://github.com/priva
 
 ## 🛠 Install
 
-Add the `zk-kit-lean-imt` crate to your `cargo.toml`:
+Install the `zk-kit-lean-imt` crate with `cargo`:
 
-```toml
-zk-kit-lean-imt = { git = "https://github.com/privacy-scaling-explorations/zk-kit.rust", package = "zk-kit-lean-imt" }
+```commandline
+cargo add zk-kit-lean-imt
 ```
 
 ## 📜 Usage
 
 ```rust
+use lean_imt::hashed_tree::{HashedLeanIMT, LeanIMTHasher};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
-use zk_kit_lean_imt::hashed_tree::{HashedLeanIMT, LeanIMTHasher};
 
 // Setup hasher
 struct SampleHasher;
