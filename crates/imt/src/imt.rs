@@ -89,6 +89,10 @@ impl IMT {
         self.arity
     }
 
+    pub fn index_of(&self, leaf: IMTNode) -> Option<usize> {
+        self.nodes.get(0)?.iter().position(|n| n == &leaf)
+    }
+
     pub fn insert(&mut self, leaf: IMTNode) -> Result<(), &'static str> {
         if self.nodes[0].len() >= self.arity.pow(self.depth as u32) {
             return Err("The tree is full");
@@ -321,5 +325,22 @@ mod tests {
 
         assert_eq!(imt.depth(), 3);
         assert_eq!(imt.arity(), 2);
+    }
+
+    #[test]
+    fn test_index_of() {
+        let hash: IMTHashFunction = simple_hash_function;
+        let imt = IMT::new(
+            hash,
+            2,
+            "zero".to_string(),
+            2,
+            vec!["leaf1".to_string(), "leaf2".to_string()],
+        )
+        .unwrap();
+
+        assert_eq!(imt.index_of("leaf1".to_string()), Some(0));
+        assert_eq!(imt.index_of("leaf2".to_string()), Some(1));
+        assert_eq!(imt.index_of("leaf3".to_string()), None);
     }
 }
