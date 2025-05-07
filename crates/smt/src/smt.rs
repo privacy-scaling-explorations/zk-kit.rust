@@ -526,7 +526,7 @@ impl SMT {
                 return Err(SMTError::InvalidSiblingIndex);
             }
 
-            let child_nodes: ChildNodes = if path.get(starting_index as usize).is_some() {
+            let child_nodes: ChildNodes = if path[starting_index as usize] == 1 {
                 vec![siblings[starting_index as usize].clone(), node.clone()]
             } else {
                 vec![node.clone(), siblings[starting_index as usize].clone()]
@@ -553,7 +553,7 @@ impl SMT {
     /// * `siblings` - The siblings of the path.
     fn delete_old_nodes(&mut self, mut node: Node, path: &[usize], siblings: &Siblings) {
         for i in (0..siblings.len()).rev() {
-            let child_nodes: ChildNodes = if path.get(i).is_some() {
+            let child_nodes: ChildNodes = if path[i] == 1 {
                 vec![siblings[i].clone(), node.clone()]
             } else {
                 vec![node.clone(), siblings[i].clone()]
