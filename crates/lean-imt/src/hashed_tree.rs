@@ -40,6 +40,10 @@ where
     }
 
     /// Inserts multiple leaves.
+    ///
+    /// # Errors
+    /// 
+    /// Will return [`LeanIMTError::EmptyBatchInsert`] if `leaves` is an empty array
     pub fn insert_many(&mut self, leaves: &[[u8; N]]) -> Result<(), LeanIMTError> {
         self.tree.insert_many(leaves, H::hash)
     }
