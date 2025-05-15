@@ -3,7 +3,9 @@
 //! Lean Incremental Merkle Tree implementation.
 //!
 //! Specifications can be found here:
-//!  - https://github.com/privacy-scaling-explorations/zk-kit/blob/main/papers/leanimt/paper/leanimt-paper.pdf
+//!  - <https://github.com/privacy-scaling-explorations/zk-kit/blob/main/papers/leanimt/paper/leanimt-paper.pdf>
+
+#![allow(clippy::manual_div_ceil)]
 
 use thiserror::Error;
 
