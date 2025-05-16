@@ -30,19 +30,17 @@
 //!     }
 //! }
 //!
-//! fn main() {
-//!     let mut tree = HashedLeanIMT::<32, SampleHasher>::new(&[], SampleHasher).unwrap();
+//! let mut tree = HashedLeanIMT::<32, SampleHasher>::new(&[], SampleHasher).unwrap();
 //!
-//!     tree.insert(&[1; 32]);
-//!     tree.insert(&[2; 32]);
-//!     tree.insert_many(&[[3; 32], [4; 32], [5; 32]]);
+//! tree.insert(&[1; 32]);
+//! tree.insert(&[2; 32]);
+//! tree.insert_many(&[[3; 32], [4; 32], [5; 32]]);
 //!
-//!     println!("Tree root: {:?}", tree.root().unwrap());
-//!     println!("Tree depth: {}", tree.depth());
+//! println!("Tree root: {:?}", tree.root().unwrap());
+//! println!("Tree depth: {}", tree.depth());
 //!
-//!     let proof = tree.generate_proof(3).unwrap();
-//!     assert!(HashedLeanIMT::<32, SampleHasher>::verify_proof(&proof));
-//! }
+//! let proof = tree.generate_proof(3).unwrap();
+//! assert!(HashedLeanIMT::<32, SampleHasher>::verify_proof(&proof));
 //! ```
 
 pub mod hashed_tree;
