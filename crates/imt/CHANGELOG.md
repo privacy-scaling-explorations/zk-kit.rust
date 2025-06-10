@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.7](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-imt-v0.0.6...zk-kit-imt-v0.0.7) - 2025-06-10
+
+### Other
+
+- Add missing `index_of()` fn ([#67](https://github.com/privacy-scaling-explorations/zk-kit.rust/pull/67))
+
 ## [0.0.6](https://github.com/privacy-scaling-explorations/zk-kit.rust/compare/zk-kit-imt-v0.0.5...zk-kit-imt-v0.0.6) - 2024-09-04
 
 ### Other
