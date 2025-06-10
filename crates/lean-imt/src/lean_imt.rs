@@ -86,7 +86,7 @@ impl<const N: usize> LeanIMT<N> {
     /// Inserts multiple leaves.
     ///
     /// # Errors
-    /// 
+    ///
     /// Will return [`LeanIMTError::EmptyBatchInsert`] if `leaves` is an empty array
     pub fn insert_many(
         &mut self,
